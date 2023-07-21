@@ -11,5 +11,11 @@ export class HomePage {
   constructor(public navCtrl: NavController) {
 
   }
+  
+  // por padrão o método é público
+  login() {
+    this.navCtrl.setRoot('CategoriasPage');
+    // ao utilizar PUSH(empilhar pagina emcima) é adicionado a aba VOLTAR automaticamente
+  }
 
 }
