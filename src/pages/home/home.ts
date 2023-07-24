@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
+import { AuthService } from '../../services/auth.services';
 
 @IonicPage() // isso fara que o nome dessa classe seja obtido como String
 @Component({
@@ -12,7 +13,9 @@ export class HomePage {
 
   creds : CredenciaisDTO = {email : "", senha : ""}
                   // injeção de dependencia de navCtrl automatica
-  constructor(public navCtrl: NavController, public menu:MenuController) {
+  constructor(public navCtrl: NavController, 
+    public menu:MenuController,
+    public auth: AuthService) {
 
   }
   
@@ -26,8 +29,13 @@ export class HomePage {
 
   // por padrão o método é público
   login() {
-    console.log(this.creds);
-    this.navCtrl.setRoot('CategoriasPage');
+    this.auth.authenticate(this.creds).subscribe(
+      response => {
+        console.log(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {}
+    );
     // ao utilizar PUSH(empilhar pagina emcima) é adicionado a aba VOLTAR automaticamente
   }
 
