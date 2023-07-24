@@ -34,7 +34,7 @@ export class CategoriasPage {
       this.items = response; // funções anonimas CALLBACK
     },
       error => { // caso a requisição de erro
-      console.log(error);
+      //console.log(error);
     });
   }
 }
