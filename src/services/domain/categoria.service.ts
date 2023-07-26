@@ -11,7 +11,7 @@ export class CategoriaService {
     }
 
     findAll() : Observable<CategoriaDTO[]> {
-        return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`); 
+        return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
                                     // crase ` nao nessecita de concatenar com +
         //return this.http.get("http://localhost:8080/categorias"); alternativa mais VERBOSA com repetição
     }

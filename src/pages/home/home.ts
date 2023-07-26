@@ -28,6 +28,7 @@ export class HomePage {
   }
 
   // por padrão o método é público
+  // se o campo estiver vazio nem deveria chamar esse metodo para evitar SOBRECARGA do backend
   login() {
     this.auth.authenticate(this.creds).subscribe(
       response => {
