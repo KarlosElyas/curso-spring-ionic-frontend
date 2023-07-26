@@ -12,12 +12,8 @@ export class ClienteService {
     }
 
     findByEmail(email: string) : Observable<ClienteDTO> {
-        let token = this.storage.getLocalUser().token;
-        let authHeader = new HttpHeaders({'Authorization': 'Bearer ' + token});
-
-        return this.http.get<ClienteDTO>(
-            `${API_CONFIG.baseUrl}/clientes/email?value=${email}`,
-            {headers: authHeader}); // atribuo o cabeçalho headers da requisição ao meu authorization
+        return this.http.get<ClienteDTO>(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
+            //{headers: authHeader}); // atribuo o cabeçalho headers da requisição ao meu authorization
             // o motivo disso é que para buscar usuario por email necessita de autenticação
     }
 
