@@ -20,15 +20,25 @@ export class HomePage {
   }
   
   ionViewWillEnter(){
-    this.menu.swipeEnable(false);
+    this.menu.swipeEnable(false); // esconde a barrinha lateral de MENU na home de login
   }
 
   ionViewDidLeave(){
     this.menu.swipeEnable(true);
   }
 
+  ionViewDidEnter() {
+    this.auth.refreshToken().subscribe(
+      response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+      error => {}
+    );
+  }
+
   // por padrão o método é público
-  // se o campo estiver vazio nem deveria chamar esse metodo para evitar SOBRECARGA do backend
+  // se o campo estiver VAZIO nem deveria chamar esse metodo para evitar SOBRECARGA do backend
   login() {
     this.auth.authenticate(this.creds).subscribe(
       response => {
