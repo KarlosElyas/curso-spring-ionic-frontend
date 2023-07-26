@@ -50,4 +50,8 @@ export class HomePage {
     // ao utilizar PUSH(empilhar pagina emcima) é adicionado a aba VOLTAR automaticamente
   }
 
+  signup() {
+    this.navCtrl.push('SignupPage');
+  }
+
 }
