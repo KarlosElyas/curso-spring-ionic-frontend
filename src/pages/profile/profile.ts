@@ -23,14 +23,21 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
+    
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email).subscribe(
         response => {
           this.cliente = response; // ja "converte" o JSON para o DTO de cliente
           this.getImageIfExists();
         },
-        error => {}
+        error => {
+          if (error.status === 403) {
+            this.navCtrl.setRoot('HomePage');
+          } 
+        }
       );
+    } else {
+      this.navCtrl.setRoot('HomePage'); // se não estiver autenticado retorna para home(inicio)
     }
   }
 
