@@ -55,3 +55,10 @@ export class HomePage {
   }
 
 }
+
+/* SUGESTÕES
+  - No login inicial chegar se campos estão Preenchidos antes de acessar o backend
+  - Ao buscar cidades no REGISTRAR guardalas como cache pra evitar REQUISIÇÕES DESNECESSARIAS
+  - Verificar se email ja está cadastrado
+  - PREENCHER ENDEREÇO de acordo com CEP informado 
+*/
