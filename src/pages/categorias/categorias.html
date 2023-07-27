@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let item of items"><!-- items é o mesmo nome do vetor items em categorias.ts -->
+  <ion-list> <!-- items é o mesmo NOME do vetor items em categorias.ts -->
+    <button ion-item *ngFor="let item of items" (click)="showProdutos()">
       <ion-thumbnail item-start>
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
       </ion-thumbnail>
