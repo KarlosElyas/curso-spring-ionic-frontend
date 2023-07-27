@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
+import { ClienteService } from '../../services/domain/cliente.service';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,9 @@ export class SignupPage {
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public cidadeService: CidadeService,
-    public estadoService: EstadoService
+    public estadoService: EstadoService,
+    public clienteService: ClienteService,
+    public alertCtrl: AlertController
     ) {
       this.formGroup = this.formBuilder.group({
         nome: ['Joaquim Barbosa', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -69,7 +72,28 @@ export class SignupPage {
   }
 
   signupUser() {
-    console.log('signupUser');
+    // por está passando o VALOR do formgroup NÃO necessita de um clienteDTO para JUNTAR TODOS OS DADOS
+    this.clienteService.insert(this.formGroup.value).subscribe(
+      response => {
+        this.showInsertOk();
+      },
+      error => {}
+    );
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtrl.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false, // desnecessario ter que clicar no botao pra continuar
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          this.navCtrl.pop(); // desempilha a pagina de cadastro e volta pro LOGIN
+        }
+      }]
+    });
+    alert.present();
   }
 
 }
