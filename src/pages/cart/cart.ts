@@ -4,6 +4,7 @@ import { CartItem } from '../../models/cart-item';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { API_CONFIG } from '../../config/api.config';
 import { CartService } from '../../services/domain/cart.service';
+import { ProdutoDTO } from '../../models/produto.dto';
 
 @IonicPage()
 @Component({
@@ -36,5 +37,27 @@ export class CartPage {
         error => {}
       );      
     }
+  }
+
+  // chama todas as funções no CONTROLADOR do carrinho
+  removeItem(produto: ProdutoDTO) { // o mesmo que Cart.items
+    this.items = this.cartService.removeProduto(produto).items; // recebe o items atualizado
+  }
+
+  increaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.increaseQuantity(produto).items;
+  }
+
+  decreaseQuantity(produto: ProdutoDTO) {
+    this.items = this.cartService.decreaseQuantity(produto).items;
+  }
+
+  // provavelmente o SWATCH chama essa função toda hora, então sempre que mexe no carrinho ela atualiza
+  total() : number {
+    return this.cartService.total();
+  }
+
+  goOn() { // continuar compras
+    this.navCtrl.setRoot('CategoriasPage');
   }
 }
