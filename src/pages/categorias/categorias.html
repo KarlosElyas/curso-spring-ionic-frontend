@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab top right edge>
+    <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
+  </ion-fab>
   <ion-list> <!-- items é o mesmo NOME do vetor items em categorias.ts -->
     <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail item-start>
