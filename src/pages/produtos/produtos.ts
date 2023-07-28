@@ -20,6 +20,7 @@ export class ProdutosPage {
     ) {
   }
 
+  // recebendo o PARAMETRO de categorias.ts
   ionViewDidLoad() {
     let categoria_id = this.navParams.get('categoria_id'); // pega o paremetro do id
     this.produtoService.findByCategoria(categoria_id).subscribe(
@@ -43,7 +44,8 @@ export class ProdutosPage {
     }
   }
 
-  showDetail() {
-    this.navCtrl.push('ProdutoDetailPage');
+  // passando PARAMETROS de uma página pra outra VIA BODY
+  showDetail(produto_id : string) {
+    this.navCtrl.push('ProdutoDetailPage', {produto_id: produto_id});
   }
 }
